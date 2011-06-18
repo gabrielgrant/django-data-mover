@@ -1,17 +1,5 @@
 """ Packs all data needed to move a full Django project between machines
 
-dumps the database
-dumps the bases of filepathfields
-packs up all media (user uploads)
-
-ouput is a tar.gz stream to stdout
-
-
-Usage:
-
-python manage.py pack_data > my_data_pack.tar.gz
-
-Unpack with unpack_data
 """
 import sys
 import tempfile
