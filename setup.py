@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-data-mover',
-    version='0.1.0dev',
+    version='0.1.1dev',
     author='Gabriel Grant',
     packages=['data_mover', 'data_mover.management', 'data_mover.management.commands'],
     license='LGPL',
