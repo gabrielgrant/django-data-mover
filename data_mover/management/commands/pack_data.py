@@ -26,6 +26,12 @@ class Command(BaseCommand):
 	help = "Dumps all the data needed to move a full Django project between machines"
 	args = "[appname ...]"
 
+	option_list = BaseCommand.option_list + (
+		make_option('--exclude', action='store', dest='exclude',
+			default=DEFAULT_DB_ALIAS, help='A comma seperated list of apps or models '
+				'whose data should be excluded from the dump.'),
+	)
+
 	def handle(self, *args, **options):
 		if 'exclude' in options:
 			if not args:
