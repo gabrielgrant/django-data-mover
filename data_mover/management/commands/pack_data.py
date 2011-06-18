@@ -13,6 +13,8 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
+from filepathfield_migrator.management.commands.dumpbase_filepathfields import get_models
+
 # from http://stackoverflow.com/questions/600268/mkdir-p-functionality-in-python
 import os, errno
 
@@ -30,14 +32,14 @@ class Command(BaseCommand):
 
 	option_list = BaseCommand.option_list + (
 		make_option('--exclude', action='store', dest='exclude',
-			default=DEFAULT_DB_ALIAS, help='A comma seperated list of apps or models '
+			default='', help='A comma seperated list of apps or models '
 				'whose data should be excluded from the dump.'),
 	)
 
 	def handle(self, *args, **options):
 		if 'exclude' in options:
 			if not args:
-				args = settings.INSTALLED_APPS
+				args = [a.split('.')[-1] for a in settings.INSTALLED_APPS]
 			args = list(set(args) - set(options['exclude'].split(',')))
 		# get temp dir
 		timestamp = datetime.datetime.now().isoformat()
